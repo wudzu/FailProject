@@ -4,7 +4,10 @@ using System.Collections.Generic;
 
 public class MechState : MonoBehaviour
 {
-	MechCore core = new MechCore();
+
+    public Player_UI_Ctrl UI_interface;
+
+    MechCore core = new MechCore();
 	List<MechArmor> armor = new List<MechArmor>();
 
 
@@ -16,7 +19,7 @@ public class MechState : MonoBehaviour
 		}
 
 		core.damage(dmg);
-		/*
+        /*
 		if (core.ifStun()) {
 			//Stun mech
 		}
@@ -24,7 +27,10 @@ public class MechState : MonoBehaviour
 		if (core.ifDead() ) {
 			//Kill mech
 		}*/
-	}
+
+        /* Update displayed mech status */
+        UI_interface.Update_Mech_state_display(core.Get_HP_Level(), core.Get_Energy_Level(), armor);
+    }
 
 	// Use this for initialization
 	void Start ()
@@ -39,7 +45,11 @@ public class MechState : MonoBehaviour
 		armor.Add(a);
 		armor.Add(b);
 		armor.Add(c);
-	}
+
+        /* initialize mech status displayed in UI */
+        UI_interface.Update_Mech_state_display(core.Get_HP_Level(), core.Get_Energy_Level(), armor);
+
+    }
 	
 	// Update is called once per frame
 	void Update ()

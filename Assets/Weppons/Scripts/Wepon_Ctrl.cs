@@ -137,7 +137,7 @@ public class Wepon_Ctrl : MonoBehaviour {
         StartingPosition = transform.localPosition;
         
         // [TO DO] might cause problems in PvP modes
-        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("PlayerWepon"));
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Players"), LayerMask.NameToLayer("PlayerWepon"));
 
     }
 	

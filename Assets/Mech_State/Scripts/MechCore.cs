@@ -28,8 +28,18 @@ public class MechCore : MonoBehaviour
 		return false;
 	}
 
-	// Use this for initialization
-	void Start ()
+    public float Get_HP_Level()
+    {
+        return structure;
+    }
+
+    public float Get_Energy_Level()
+    {
+        return energy;
+    }
+
+    // Use this for initialization
+    void Start ()
 	{
 	
 	}
