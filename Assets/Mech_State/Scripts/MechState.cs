@@ -10,6 +10,25 @@ public class MechState : MonoBehaviour
     MechCore core = new MechCore();
 	List<MechArmor> armor = new List<MechArmor>();
 
+	public List<string> getArmorName()
+	{
+		List<string> result = new List<string>();
+		foreach (MechArmor arm in armor) {
+			string temp = arm.getName();
+			result.Add(temp);
+		}
+		return result;
+	}
+
+	public List<float> getArmorStructure()
+	{
+		List<float> result = new List<float>();
+		foreach (MechArmor arm in armor) {
+			float temp = arm.getStructure();
+			result.Add(temp);
+		}
+		return result;
+	}
 
 	public void damage (MechDamage dmg)
 	{
