@@ -11,7 +11,19 @@ public class MechArmor
 	Dictionary<string, float> reduction = new Dictionary<string, float>();
 	Dictionary<string, float> destruction = new Dictionary<string, float>();
 
+	string name;
+
+	public string getName()
+	{
+		return name;
+	}
+
 	float structure;
+
+	public float getStructure()
+	{
+		return structure;
+	}
 
 	//var Temperature;
 
@@ -109,6 +121,7 @@ public class MechArmor
 
 			structure = 100.0f;
 			mass = 8.0f;
+			name = "Soft Metal";
 
 			break;
 		
@@ -145,6 +158,7 @@ public class MechArmor
 
 			structure = 100.0f;
 			mass = 10.0f;
+			name = "Hard Metal";
 
 			break;
 
@@ -181,6 +195,7 @@ public class MechArmor
 
 			structure = 100.0f;
 			mass = 7.0f;
+			name = "Ammortization";
 
 			break;
 		}
