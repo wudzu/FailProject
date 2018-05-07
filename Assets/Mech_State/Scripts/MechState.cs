@@ -32,12 +32,35 @@ public class MechState : MonoBehaviour
 
 	public void damage (MechDamage dmg)
 	{
-		foreach (MechArmor arm in armor)
+
+        Debug.Log("MechState1: " + dmg.basicDamage["Blunt"].ToString() +
+                            " , " + dmg.basicDamage["Cut"].ToString() +
+                            " , " + dmg.basicDamage["Pierce"].ToString() +
+                            " , " + dmg.basicDamage["Abrasive"].ToString());
+
+        foreach (MechArmor arm in armor)
 		{
 			dmg = arm.damage(dmg);
-		}
+            Debug.Log("det: " + dmg.basicDamage["Blunt"].ToString() +
+                                " , " + dmg.basicDamage["Cut"].ToString() +
+                                " , " + dmg.basicDamage["Pierce"].ToString() +
+                                " , " + dmg.basicDamage["Abrasive"].ToString());
+        }
 
-		core.damage(dmg);
+        Debug.Log("MechState2: " + dmg.basicDamage["Blunt"].ToString() +
+                            " , " + dmg.basicDamage["Cut"].ToString() +
+                            " , " + dmg.basicDamage["Pierce"].ToString() +
+                            " , " + dmg.basicDamage["Abrasive"].ToString());
+
+        core.damage(dmg);
+
+        Debug.Log("MechState3: " + dmg.basicDamage["Blunt"].ToString() +
+                            " , " + dmg.basicDamage["Cut"].ToString() +
+                            " , " + dmg.basicDamage["Pierce"].ToString() +
+                            " , " + dmg.basicDamage["Abrasive"].ToString());
+
+
+
         /*
 		if (core.ifStun()) {
 			//Stun mech
@@ -73,7 +96,9 @@ public class MechState : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-	
-	}
+        core.CoreUpdate(Time.deltaTime);
+
+        UI_interface.Update_Mech_state_display(core.Get_HP_Level(), core.Get_Energy_Level(), armor);
+    }
 }
 

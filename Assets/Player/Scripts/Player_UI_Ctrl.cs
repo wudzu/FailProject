@@ -6,17 +6,20 @@ public class Player_UI_Ctrl : MonoBehaviour {
 
     public UnityEngine.UI.Text TempTextUI;
 
-    void SetStatusText( float HP, List<MechArmor> Armors )
+    void SetStatusText( float HP, float Energy, List<MechArmor> Armors )
     {
 
         if (TempTextUI)
         {
-            TempTextUI.text = "Player 1/n/n  Core: ";
+            TempTextUI.text = "Player 1\n\n  Core: ";
             TempTextUI.text += HP.ToString();
             foreach(MechArmor Armor_layer in Armors)
             {
-                TempTextUI.text += "/n  Armor (";
+                TempTextUI.text += "\n  Armor (" + Armor_layer.getName() + ") : " + Armor_layer.getStructure().ToString();
             }
+
+            TempTextUI.text += "\n\n  Energy: ";
+            TempTextUI.text += Energy.ToString();
         }
         else
         {
@@ -27,7 +30,7 @@ public class Player_UI_Ctrl : MonoBehaviour {
 
     public void Update_Mech_state_display( float HP, float Energy, List<MechArmor> Armors)
     {
-        SetStatusText(HP, Armors);
+        SetStatusText(HP, Energy, Armors);
     }
 
 	// Use this for initialization

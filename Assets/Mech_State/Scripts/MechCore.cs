@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MechCore : MonoBehaviour
+public class MechCore 
 {
 
 	float structure = 100.0f; //HP
@@ -38,16 +38,11 @@ public class MechCore : MonoBehaviour
         return energy;
     }
 
-    // Use this for initialization
-    void Start ()
+
+    // Update is called once per frame
+    public void CoreUpdate (float TimeDif)
 	{
-	
-	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-		energy = energy + regeneration;
+		energy = energy + regeneration* TimeDif;
 		if (energy > structure)
 			energy = structure;
 	}
