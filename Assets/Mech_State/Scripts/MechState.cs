@@ -8,7 +8,7 @@ public class MechState : MonoBehaviour
 	List<MechArmor> armor = new List<MechArmor>();
 
 
-	void damage (MechDamage dmg)
+	public void damage (MechDamage dmg)
 	{
 		foreach (MechArmor arm in armor)
 		{

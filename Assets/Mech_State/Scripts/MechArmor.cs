@@ -21,35 +21,35 @@ public class MechArmor
 
 	MechDamage reduct(MechDamage dmg)
 	{
-		dmg.basicDamage ["Blunt"] = dmg.basicDamage ["Blunt"] * reduction ["Blunt"];
-		dmg.basicDamage ["Cut"] = dmg.basicDamage ["Cut"] * reduction ["Cut"];
-		dmg.basicDamage ["Pierce"] = dmg.basicDamage ["Pierce"] * reduction ["Pierce"];
-		dmg.basicDamage ["Abrasive"] = dmg.basicDamage ["Abrasive"] * reduction ["Abrasive"];
+		dmg.basicDamage ["Blunt"] = dmg.basicDamage ["Blunt"] * (reduction ["Blunt"] * structure / 100.0f);
+		dmg.basicDamage ["Cut"] = dmg.basicDamage ["Cut"] * (reduction ["Cut"] * structure / 100.0f);
+		dmg.basicDamage ["Pierce"] = dmg.basicDamage ["Pierce"] * (reduction ["Pierce"] * structure / 100.0f);
+		dmg.basicDamage ["Abrasive"] = dmg.basicDamage ["Abrasive"] * (reduction ["Abrasive"] * structure / 100.0f);
 
 		return dmg;
 	}
 
 	MechDamage changeDmg(MechDamage dmg)
 	{
-		dmg.basicDamage ["Blunt"] = dmg.basicDamage ["Blunt"] * change ["Blunt_to_Blunt"] +
-									dmg.basicDamage ["Cut"] * change ["Cut_to_Blunt"] +
-									dmg.basicDamage ["Pierce"] * change ["Pierce_to_Blunt"] +
-									dmg.basicDamage ["Abrasive"] * change ["Abrasive_to_Blunt"];
+		dmg.basicDamage ["Blunt"] = dmg.basicDamage ["Blunt"] * (((change ["Blunt_to_Blunt"]  * structure) + (100.0f - structure) ) / 100.0f ) +
+								dmg.basicDamage ["Cut"] * (((change ["Cut_to_Blunt"]  * structure)) / 100.0f ) +
+								dmg.basicDamage ["Pierce"] * (((change ["Pierce_to_Blunt"]  * structure)) / 100.0f ) +
+								dmg.basicDamage ["Abrasive"] * (((change ["Abrasive_to_Blunt"]  * structure)) / 100.0f );
 
-		dmg.basicDamage ["Cut"] = dmg.basicDamage ["Blunt"] * change ["Blunt_to_Cut"] +
-									dmg.basicDamage ["Cut"] * change ["Cut_to_Cut"] +
-									dmg.basicDamage ["Pierce"] * change ["Pierce_to_Cut"] +
-									dmg.basicDamage ["Abrasive"] * change ["Abrasive_to_Cut"];
+		dmg.basicDamage ["Cut"] = dmg.basicDamage ["Blunt"] * (((change ["Blunt_to_Cut"]  * structure)) / 100.0f ) +
+								dmg.basicDamage ["Cut"] * (((change ["Cut_to_Cut"]  * structure) + (100.0f - structure) ) / 100.0f ) +
+								dmg.basicDamage ["Pierce"] * (((change ["Pierce_to_Cut"]  * structure)) / 100.0f ) +
+								dmg.basicDamage ["Abrasive"] * (((change ["Abrasive_to_Cut"]  * structure)) / 100.0f );
 
-		dmg.basicDamage ["Pierce"] = dmg.basicDamage ["Blunt"] * change ["Blunt_to_Pierce"] +
-									dmg.basicDamage ["Cut"] * change ["Cut_to_Pierce"] +
-									dmg.basicDamage ["Pierce"] * change ["Pierce_to_Pierce"] +
-									dmg.basicDamage ["Abrasive"] * change ["Abrasive_to_Pierce"];
+		dmg.basicDamage ["Pierce"] = dmg.basicDamage ["Blunt"] * (((change ["Blunt_to_Pierce"]  * structure)) / 100.0f ) +
+								dmg.basicDamage ["Cut"] * (((change ["Cut_to_Pierce"]  * structure)) / 100.0f ) +
+								dmg.basicDamage ["Pierce"] * (((change ["Pierce_to_Pierce"]  * structure) + (100.0f - structure) ) / 100.0f ) +
+								dmg.basicDamage ["Abrasive"] * (((change ["Abrasive_to_Pierce"]  * structure)) / 100.0f );
 
-		dmg.basicDamage ["Abrasive"] = dmg.basicDamage ["Blunt"] * change ["Blunt_to_Abrasive"] +
-									dmg.basicDamage ["Cut"] * change ["Cut_to_Abrasive"] +
-									dmg.basicDamage ["Pierce"] * change ["Pierce_to_Abrasive"] +
-									dmg.basicDamage ["Abrasive"] * change ["Abrasive_to_Abrasive"];
+		dmg.basicDamage ["Abrasive"] = dmg.basicDamage ["Blunt"] * (((change ["Blunt_to_Abrasive"]  * structure)) / 100.0f ) +
+								dmg.basicDamage ["Cut"] * (((change ["Cut_to_Abrasive"]  * structure)) / 100.0f ) +
+								dmg.basicDamage ["Pierce"] * (((change ["Pierce_to_Abrasive"]  * structure)) / 100.0f ) +
+								dmg.basicDamage ["Abrasive"] * (((change ["Abrasive_to_Abrasive"]  * structure) + (100.0f - structure) ) / 100.0f );
 
 		return dmg;
 	}
