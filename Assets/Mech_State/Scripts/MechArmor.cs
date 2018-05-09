@@ -87,7 +87,7 @@ public class MechArmor
 
 			return finalDmg;
 		}
-		return finalDmg;
+		return dmg;
 	}
 
 	public void LoadNew(A_Type armor)
