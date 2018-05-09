@@ -33,10 +33,10 @@ public class MechArmor
 
 	MechDamage reduct(MechDamage dmg)
 	{
-		dmg.basicDamage ["Blunt"] = dmg.basicDamage ["Blunt"] * (reduction ["Blunt"] * structure / 100.0f);
-		dmg.basicDamage ["Cut"] = dmg.basicDamage ["Cut"] * (reduction ["Cut"] * structure / 100.0f);
-		dmg.basicDamage ["Pierce"] = dmg.basicDamage ["Pierce"] * (reduction ["Pierce"] * structure / 100.0f);
-		dmg.basicDamage ["Abrasive"] = dmg.basicDamage ["Abrasive"] * (reduction ["Abrasive"] * structure / 100.0f);
+		dmg.basicDamage ["Blunt"] = dmg.basicDamage ["Blunt"] * ((1 - reduction ["Blunt"]) * structure / 100.0f);
+		dmg.basicDamage ["Cut"] = dmg.basicDamage ["Cut"] * ((1 - reduction ["Cut"]) * structure / 100.0f);
+		dmg.basicDamage ["Pierce"] = dmg.basicDamage ["Pierce"] * ((1 - reduction ["Pierce"]) * structure / 100.0f);
+		dmg.basicDamage ["Abrasive"] = dmg.basicDamage ["Abrasive"] * ((1 - reduction ["Abrasive"]) * structure / 100.0f);
 
 		return dmg;
 	}
