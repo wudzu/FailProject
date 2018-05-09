@@ -73,15 +73,20 @@ public class MechArmor
 								dmg.basicDamage ["Pierce"] * destruction ["Pierce"] +
 								dmg.basicDamage ["Abrasive"] * destruction ["Abrasive"];
 
+		if (structure < 0.0f)
+			structure = 0.0f;
 		structure = structure - structureDamage;
 	}
 
 	public MechDamage damage(MechDamage dmg)
 	{
-		MechDamage reductedDmg = reduct (dmg);
-		destruct (reductedDmg);
-		MechDamage finalDmg = changeDmg (reductedDmg);
+		if (structure > 0.0f) {
+			MechDamage reductedDmg = reduct (dmg);
+			destruct (reductedDmg);
+			MechDamage finalDmg = changeDmg (reductedDmg);
 
+			return finalDmg;
+		}
 		return finalDmg;
 	}
 
