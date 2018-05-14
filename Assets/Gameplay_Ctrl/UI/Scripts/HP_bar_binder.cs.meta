@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 8815d4d51a575be4198e5ac510608418
+timeCreated: 1526256426
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - HP_Bar_prefab: {fileID: 1807657462678114, guid: bae05911d68560d4aaf5c14a3be7f0a4,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
