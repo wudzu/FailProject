@@ -77,6 +77,8 @@ public class MechState : MonoBehaviour
 		armor.Add(b);
 		armor.Add(c);
 
+		core.start();
+
         /* initialize mech status displayed in UI */
         UI_interface.Update_Mech_state_display(core.Get_HP_Level(), core.Get_Energy_Level(), armor);
 

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MechArmorConstantsContainer>
+	<Constants>
+		<CoreStructure>100.0</CoreStructure>
+		<CoreEnergy>100.0</CoreEnergy>
+		<CoreRegeneration>5.0</CoreRegeneration>
+		<BluntEnergyDamage>0.25</BluntEnergyDamage>
+		<CutEnergyDamage>0.5</CutEnergyDamage>
+		<PierceEnergyDamage>0.75</PierceEnergyDamage>
+		<AbrasiveEnergyDamage>0.50</AbrasiveEnergyDamage>
+		<EnergyDamageThreshold>2.0</EnergyDamageThreshold>
+		<EnergyDamageRate>1.0</EnergyDamageRate>
+		<EnergyLeakRate>10.0</EnergyLeakRate>
+	</Constants>
+</MechArmorConstantsContainer>
