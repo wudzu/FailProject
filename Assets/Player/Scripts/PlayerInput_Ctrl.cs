@@ -26,6 +26,8 @@ public class PlayerInput_Ctrl : MonoBehaviour {
     InputTable_G MyInput = new InputTable_G();
     Rigidbody Body;
 
+    float moveUpdateTimer = 0;
+
 	// Use this for initialization
 	void Start () {
         Body = gameObject.GetComponent<Rigidbody>();
@@ -75,7 +77,7 @@ public class PlayerInput_Ctrl : MonoBehaviour {
         if (left) MoveDir += Vector3.left;
         if (right) MoveDir += Vector3.right;
         MoveDir.Normalize();
-
+        
         if (M_Start)
         {
             switch (MountedDrive)
@@ -86,19 +88,24 @@ public class PlayerInput_Ctrl : MonoBehaviour {
                     Body.AddForce(MoveDir * Speed_2 * WheelFriction, ForceMode.Impulse);
                     break;
             }
+            moveUpdateTimer = Time.time;
         }
         else
         {
+            float TimeFromLast_speedUpdate = Time.time - moveUpdateTimer ;
+            float TimeScaler = 1f / (30f * TimeFromLast_speedUpdate); /* 30 FPS expected*/ 
 
             switch (MountedDrive)
             {
                 case DriveType.JetThrusters:
-                    Body.AddForce(MoveDir * Speed_1, ForceMode.Force);
+                    Body.AddForce(MoveDir * Speed_1 * TimeScaler, ForceMode.Force);
                     break;
                 case DriveType.TankTread:
-                    Body.AddForce(MoveDir * Speed_2, ForceMode.Force);
+                    Body.AddForce(MoveDir * Speed_2 * TimeScaler, ForceMode.Force);
                     break;
             }
+            
+            moveUpdateTimer = Time.time;
         }
 
     }
