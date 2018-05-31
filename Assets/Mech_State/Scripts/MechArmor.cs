@@ -2,8 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public enum A_Type { MetalSoft, MetalHard, Ammortization };
-
 
 public class MechArmor
 {
@@ -90,120 +88,50 @@ public class MechArmor
 		return dmg;
 	}
 
-	public void LoadNew(A_Type armor)
+	public void reload(MechArmorItem item)
 	{
-		switch (armor) {
-		case A_Type.MetalSoft:
-			change ["Blunt_to_Blunt"] = 1.0f;
-			change ["Cut_to_Blunt"] = 1.0f;
-			change ["Pierce_to_Blunt"] = 1.0f;
-			change ["Abrasive_to_Blunt"] = 0.0f;
+		change ["Blunt_to_Blunt"] = item.change_Blunt_to_Blunt;
+		change ["Cut_to_Blunt"] = item.change_Cut_to_Blunt;
+		change ["Pierce_to_Blunt"] = item.change_Pierce_to_Blunt;
+		change ["Abrasive_to_Blunt"] = item.change_Abrasive_to_Blunt;
 
-			change ["Blunt_to_Cut"] = 0.0f;
-			change ["Cut_to_Cut"] = 0.0f;
-			change ["Pierce_to_Cut"] = 0.0f;
-			change ["Abrasive_to_Cut"] = 0.0f;
+		change ["Blunt_to_Cut"] = item.change_Blunt_to_Cut;
+		change ["Cut_to_Cut"] = item.change_Cut_to_Cut;
+		change ["Pierce_to_Cut"] = item.change_Pierce_to_Cut;
+		change ["Abrasive_to_Cut"] = item.change_Abrasive_to_Cut;
 
-			change ["Blunt_to_Pierce"] = 0.0f;
-			change ["Cut_to_Pierce"] = 0.0f;
-			change ["Pierce_to_Pierce"] = 0.0f;
-			change ["Abrasive_to_Pierce"] = 0.0f;
+		change ["Blunt_to_Pierce"] = item.change_Blunt_to_Pierce;
+		change ["Cut_to_Pierce"] = item.change_Cut_to_Pierce;
+		change ["Pierce_to_Pierce"] = item.change_Pierce_to_Pierce;
+		change ["Abrasive_to_Pierce"] = item.change_Abrasive_to_Pierce;
 
-			change ["Blunt_to_Abrasive"] = 0.0f;
-			change ["Cut_to_Abrasive"] = 0.0f;
-			change ["Pierce_to_Abrasive"] = 0.0f;
-			change ["Abrasive_to_Abrasive"] = 1.0f;
+		change ["Blunt_to_Abrasive"] = item.change_Blunt_to_Abrasive;
+		change ["Cut_to_Abrasive"] = item.change_Cut_to_Abrasive;
+		change ["Pierce_to_Abrasive"] = item.change_Pierce_to_Abrasive;
+		change ["Abrasive_to_Abrasive"] = item.change_Abrasive_to_Abrasive;
 
-			reduction ["Blunt"] = 0.12f;
-			reduction ["Cut"] = 0.0f;
-			reduction ["Pierce"] = 0.0f;
-			reduction ["Abrasive"] = 0.8f;
+		reduction ["Blunt"] = item.reduction_Blunt;
+		reduction ["Cut"] = item.reduction_Cut;
+		reduction ["Pierce"] = item.reduction_Pierce;
+		reduction ["Abrasive"] = item.reduction_Abrasive;
 
-			destruction ["Blunt"] = 0.1f;
-			destruction ["Cut"] = 0.4f;
-			destruction ["Pierce"] = 0.4f;
-			destruction ["Abrasive"] = 0.5f;
+		destruction ["Blunt"] = item.destruction_Blunt;
+		destruction ["Cut"] = item.destruction_Cut;
+		destruction ["Pierce"] = item.destruction_Pierce;
+		destruction ["Abrasive"] = item.destruction_Abrasive;
 
-			structure = 100.0f;
-			mass = 8.0f;
-			name = "Soft Metal";
-
-			break;
-		
-		case A_Type.MetalHard:
-			change ["Blunt_to_Blunt"] = 1.0f;
-			change ["Cut_to_Blunt"] = 1.0f;
-			change ["Pierce_to_Blunt"] = 1.0f;
-			change ["Abrasive_to_Blunt"] = 0.0f;
-
-			change ["Blunt_to_Cut"] = 0.0f;
-			change ["Cut_to_Cut"] = 0.0f;
-			change ["Pierce_to_Cut"] = 0.0f;
-			change ["Abrasive_to_Cut"] = 0.0f;
-
-			change ["Blunt_to_Pierce"] = 0.0f;
-			change ["Cut_to_Pierce"] = 0.0f;
-			change ["Pierce_to_Pierce"] = 0.0f;
-			change ["Abrasive_to_Pierce"] = 0.0f;
-
-			change ["Blunt_to_Abrasive"] = 0.0f;
-			change ["Cut_to_Abrasive"] = 0.0f;
-			change ["Pierce_to_Abrasive"] = 0.0f;
-			change ["Abrasive_to_Abrasive"] = 1.0f;
-
-			reduction ["Blunt"] = 0.1f;
-			reduction ["Cut"] = 0.0f;
-			reduction ["Pierce"] = 0.0f;
-			reduction ["Abrasive"] = 0.6f;
-
-			destruction ["Blunt"] = 0.5f;
-			destruction ["Cut"] = 0.1f;
-			destruction ["Pierce"] = 0.1f;
-			destruction ["Abrasive"] = 1.0f;
-
-			structure = 100.0f;
-			mass = 10.0f;
-			name = "Hard Metal";
-
-			break;
-
-		case A_Type.Ammortization:
-			change ["Blunt_to_Blunt"] = 1.0f;
-			change ["Cut_to_Blunt"] = 0.0f;
-			change ["Pierce_to_Blunt"] = 0.0f;
-			change ["Abrasive_to_Blunt"] = 0.0f;
-
-			change ["Blunt_to_Cut"] = 0.0f;
-			change ["Cut_to_Cut"] = 1.0f;
-			change ["Pierce_to_Cut"] = 0.0f;
-			change ["Abrasive_to_Cut"] = 0.0f;
-
-			change ["Blunt_to_Pierce"] = 0.0f;
-			change ["Cut_to_Pierce"] = 0.0f;
-			change ["Pierce_to_Pierce"] = 1.0f;
-			change ["Abrasive_to_Pierce"] = 0.0f;
-
-			change ["Blunt_to_Abrasive"] = 0.0f;
-			change ["Cut_to_Abrasive"] = 0.0f;
-			change ["Pierce_to_Abrasive"] = 0.0f;
-			change ["Abrasive_to_Abrasive"] = 1.0f;
-
-			reduction ["Blunt"] = 0.8f;
-			reduction ["Cut"] = 0.0f;
-			reduction ["Pierce"] = 0.0f;
-			reduction ["Abrasive"] = 0.0f;
-
-			destruction ["Blunt"] = 0.02f;
-			destruction ["Cut"] = 0.5f;
-			destruction ["Pierce"] = 0.5f;
-			destruction ["Abrasive"] = 0.9f;
-
-			structure = 100.0f;
-			mass = 7.0f;
-			name = "Ammortization";
-
-			break;
-		}
+		structure = item.structure;
+		mass = item.mass;
+		name = item.name;
 	}
+
+	public void LoadNew(string name)
+	{
+		MechArmorItem item = MechArmorLoader.getItem(name);
+		reload(item);
+	}
+
+
+
 }
 

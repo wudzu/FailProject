@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MechArmorContainer>
+	<Armors>
+		<MechArmorItem name="MetalSoft">
+			<structure>100.0</structure>
+			<mass>8.0</mass>
+			<change_Blunt_to_Blunt>1.0</change_Blunt_to_Blunt>
+			<change_Cut_to_Blunt>1.0</change_Cut_to_Blunt>
+			<change_Pierce_to_Blunt>1.0</change_Pierce_to_Blunt>
+			<change_Abrasive_to_Blunt>0</change_Abrasive_to_Blunt>
+
+			<change_Blunt_to_Cut>0</change_Blunt_to_Cut>
+			<change_Cut_to_Cut>0</change_Cut_to_Cut>
+			<change_Pierce_to_Cut>0</change_Pierce_to_Cut>
+			<change_Abrasive_to_Cut>0</change_Abrasive_to_Cut>
+
+			<change_Blunt_to_Pierce>0</change_Blunt_to_Pierce>
+			<change_Cut_to_Pierce>0</change_Cut_to_Pierce>
+			<change_Pierce_to_Pierce>0</change_Pierce_to_Pierce>
+			<change_Abrasive_to_Pierce>0</change_Abrasive_to_Pierce>
+
+			<change_Blunt_to_Abrasive>0</change_Blunt_to_Abrasive>
+			<change_Cut_to_Abrasive>0</change_Cut_to_Abrasive>
+			<change_Pierce_to_Abrasive>0</change_Pierce_to_Abrasive>
+			<change_Abrasive_to_Abrasive>1.0</change_Abrasive_to_Abrasive>
+
+			<reduction_Blunt>0.12</reduction_Blunt>
+			<reduction_Cut>0</reduction_Cut>
+			<reduction_Pierce>0</reduction_Pierce>
+			<reduction_Abrasive>0.8</reduction_Abrasive>
+
+			<destruction_Blunt>0.1</destruction_Blunt>
+			<destruction_Cut>0.4</destruction_Cut>
+			<destruction_Pierce>0.4</destruction_Pierce>
+			<destruction_Abrasive>0.5</destruction_Abrasive>
+		</MechArmorItem>
+		<MechArmorItem name="MetalHard">
+			<structure>100.0</structure>
+			<mass>10.0</mass>
+			<change_Blunt_to_Blunt>1.0</change_Blunt_to_Blunt>
+			<change_Cut_to_Blunt>1.0</change_Cut_to_Blunt>
+			<change_Pierce_to_Blunt>1.0</change_Pierce_to_Blunt>
+			<change_Abrasive_to_Blunt>0</change_Abrasive_to_Blunt>
+
+			<change_Blunt_to_Cut>0</change_Blunt_to_Cut>
+			<change_Cut_to_Cut>0</change_Cut_to_Cut>
+			<change_Pierce_to_Cut>0</change_Pierce_to_Cut>
+			<change_Abrasive_to_Cut>0</change_Abrasive_to_Cut>
+
+			<change_Blunt_to_Pierce>0</change_Blunt_to_Pierce>
+			<change_Cut_to_Pierce>0</change_Cut_to_Pierce>
+			<change_Pierce_to_Pierce>0</change_Pierce_to_Pierce>
+			<change_Abrasive_to_Pierce>0</change_Abrasive_to_Pierce>
+
+			<change_Blunt_to_Abrasive>0</change_Blunt_to_Abrasive>
+			<change_Cut_to_Abrasive>0</change_Cut_to_Abrasive>
+			<change_Pierce_to_Abrasive>0</change_Pierce_to_Abrasive>
+			<change_Abrasive_to_Abrasive>1.0</change_Abrasive_to_Abrasive>
+
+			<reduction_Blunt>0.1</reduction_Blunt>
+			<reduction_Cut>0</reduction_Cut>
+			<reduction_Pierce>0</reduction_Pierce>
+			<reduction_Abrasive>0.6</reduction_Abrasive>
+
+			<destruction_Blunt>0.5</destruction_Blunt>
+			<destruction_Cut>0.1</destruction_Cut>
+			<destruction_Pierce>0.1</destruction_Pierce>
+			<destruction_Abrasive>1.0</destruction_Abrasive>
+		</MechArmorItem>
+		<MechArmorItem name="Ammortization">
+			<structure>100.0</structure>
+			<mass>7.0</mass>
+			<change_Blunt_to_Blunt>1.0</change_Blunt_to_Blunt>
+			<change_Cut_to_Blunt>0</change_Cut_to_Blunt>
+			<change_Pierce_to_Blunt>0</change_Pierce_to_Blunt>
+			<change_Abrasive_to_Blunt>0</change_Abrasive_to_Blunt>
+
+			<change_Blunt_to_Cut>0</change_Blunt_to_Cut>
+			<change_Cut_to_Cut>1.0</change_Cut_to_Cut>
+			<change_Pierce_to_Cut>0</change_Pierce_to_Cut>
+			<change_Abrasive_to_Cut>0</change_Abrasive_to_Cut>
+
+			<change_Blunt_to_Pierce>0</change_Blunt_to_Pierce>
+			<change_Cut_to_Pierce>0</change_Cut_to_Pierce>
+			<change_Pierce_to_Pierce>1.0</change_Pierce_to_Pierce>
+			<change_Abrasive_to_Pierce>0</change_Abrasive_to_Pierce>
+
+			<change_Blunt_to_Abrasive>0</change_Blunt_to_Abrasive>
+			<change_Cut_to_Abrasive>0</change_Cut_to_Abrasive>
+			<change_Pierce_to_Abrasive>0</change_Pierce_to_Abrasive>
+			<change_Abrasive_to_Abrasive>1.0</change_Abrasive_to_Abrasive>
+
+			<reduction_Blunt>0.8</reduction_Blunt>
+			<reduction_Cut>0</reduction_Cut>
+			<reduction_Pierce>0</reduction_Pierce>
+			<reduction_Abrasive>0.6</reduction_Abrasive>
+
+			<destruction_Blunt>0.02</destruction_Blunt>
+			<destruction_Cut>0.5</destruction_Cut>
+			<destruction_Pierce>0.5</destruction_Pierce>
+			<destruction_Abrasive>0.9</destruction_Abrasive>
+		</MechArmorItem>
+	</Armors>
+</MechArmorContainer>

@@ -69,9 +69,9 @@ public class MechState : MonoBehaviour
 		MechArmor a = new MechArmor();
 		MechArmor b = new MechArmor();
 		MechArmor c = new MechArmor();
-		a.LoadNew(A_Type.MetalHard);
-		b.LoadNew(A_Type.MetalSoft);
-		c.LoadNew(A_Type.Ammortization);
+		a.LoadNew("MetalHard");
+		b.LoadNew("MetalSoft");
+		c.LoadNew("Ammortization");
 
 		armor.Add(a);
 		armor.Add(b);
