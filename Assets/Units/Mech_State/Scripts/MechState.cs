@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class MechState : MonoBehaviour
 {
 
-    public Player_UI_Ctrl UI_interface;
+    public MechUnit_UI_Ctrl UI_interface;
 
     MechCore core = new MechCore();
 	List<MechArmor> armor = new List<MechArmor>();

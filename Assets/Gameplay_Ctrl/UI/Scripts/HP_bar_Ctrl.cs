@@ -96,7 +96,7 @@ public class HP_bar_Ctrl : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+        /*
         List<float> tempList = new List<float>();
         tempList.Add(100f);
         tempList.Add(100f);
@@ -104,7 +104,7 @@ public class HP_bar_Ctrl : MonoBehaviour {
 
 
         Update_display_Levels( 80 , tempList);
-
+        */
         Chsange_display_position_offset(20, 0);
         
     }

@@ -7,6 +7,8 @@ public class Wepon_Ctrl : MonoBehaviour {
     public enum W_Type { none, Spear, Sword, Axe, Hammer };
 
     public W_Type Wepon = W_Type.none;
+    public MechDamage.DamageType TypeOfDamage = MechDamage.DamageType.none;
+    public float DamageLevel = 0f;
 
     public Rigidbody Player_body;
 
@@ -24,14 +26,32 @@ public class Wepon_Ctrl : MonoBehaviour {
         {
             if(AttacPhase == 3)
             {
+                /* Apply damage */
+                MechState targetMechState = Col.transform.GetComponent<MechState>();
+                if (targetMechState)
+                {
+                    float damageRescaled = DamageLevel * (0.4f + (0.1f - AttacTimer) * 5f);
+
+                    MechDamage temp_BaseDamage = new MechDamage(TypeOfDamage, damageRescaled);
+                    targetMechState.damage(temp_BaseDamage);
+                }
+                else
+                {
+                    Debug.Log("Wepon_Colider_Hit: target has no mech state ");
+                }
+
+                
+                /* apply hit phisics */
                 float Force = ImpactPush * (0.11f - AttacTimer) * 10f;
                 float angle = transform.rotation.eulerAngles.y / 180f *Mathf.PI;
                 Vector3 direction = new Vector3(Mathf.Sin(angle), 0f, Mathf.Cos(angle));
 
                 Col.rigidbody.AddForce(direction * Force, ForceMode.Impulse);
-
-
+                
+                /* ... and recoil */
                 Player_body.AddForce(-direction * Force * 0.2f, ForceMode.Impulse);
+
+                /* go to next state */
                 AttacPhase = 2;
             }
         }
