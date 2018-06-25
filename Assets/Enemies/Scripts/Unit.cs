@@ -3,24 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Unit : MonoBehaviour {
-
 	public Transform target;
 
 	float speed = 1f;
 	Vector3[] path;
 	int targetIndex;
-	Vector3 currentTargetPosition;
+	Node previousTargetNode;
+	Grid grid;
+
+	void Awake(){
+		grid = FindObjectOfType<Grid> ();
+	}
 
 	// Use this for initialization
 	void Start () {
-		PathRequestManager.RequestPath (transform.position, target.position, OnPathFound);
-		currentTargetPosition = transform.position;
+
+		Node currentTargetNode = grid.GetNodeFromWorldPoint (target.position);
+		Node currentSeekerNode = grid.GetNodeFromWorldPoint (transform.position);
+
+		if (currentTargetNode != currentSeekerNode) {
+			PathRequestManager.RequestPath (transform.position, target.position, OnPathFound);		
+		}
+
+		previousTargetNode = currentTargetNode;
 	}
 
 	void Update() {
-		if (currentTargetPosition != transform.position) {
-			PathRequestManager.RequestPath (transform.position, target.position, OnPathFound);
-			currentTargetPosition = transform.position;
+		Node currentTargetNode = grid.GetNodeFromWorldPoint (target.position);
+		Node currentSeekerNode = grid.GetNodeFromWorldPoint (transform.position);
+
+		if (currentTargetNode != previousTargetNode) {
+
+			if (currentTargetNode != currentSeekerNode) {
+				PathRequestManager.RequestPath (transform.position, target.position, OnPathFound);	
+			}
+
+			previousTargetNode = currentTargetNode;
 		}
 	}
 
@@ -35,8 +53,12 @@ public class Unit : MonoBehaviour {
 
 	IEnumerator FollowPath(){
 		Vector3 currentWaypoint = path [0];
+		targetIndex = 0;
+
+		Debug.Log ("Start Following Path");
 
 		while (true) {
+			Debug.Log ("Follow Path");
 			if (transform.position == currentWaypoint) {
 				targetIndex++;
 				if (targetIndex >= path.Length) {

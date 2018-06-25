@@ -11,7 +11,6 @@ public class Grid : MonoBehaviour {
 	public float nodeRadius;
 	Node[,] grid;
 
-
 	int gridSizeX, gridSizeY;
 	float nodeWidth;
 
