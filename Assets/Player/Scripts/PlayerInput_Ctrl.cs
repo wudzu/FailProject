@@ -17,6 +17,10 @@ public class PlayerInput_Ctrl : MonoBehaviour {
 
 
     public DriveType MountedDrive = DriveType.JetThrusters;
+    public Propultion_System Propultion = new Propultion_System(Propultion_types.TestOnly); // for testing different movement modification
+
+    public Terain_ctrl Terain_Map_ref;
+
 
     public Camera PlayerView = null;
     public GameObject GunTower = null;
@@ -77,7 +81,28 @@ public class PlayerInput_Ctrl : MonoBehaviour {
         if (left) MoveDir += Vector3.left;
         if (right) MoveDir += Vector3.right;
         MoveDir.Normalize();
-        
+
+        /* @Siv TUTAJ CZYTAJ */
+        if (Terain_Map_ref)
+        {
+            Vector2 currentPosition = new Vector2(gameObject.transform.position.x, gameObject.transform.position.z);
+            Terain_types terrainUnderMech = Terain_Map_ref.GetTerainAt(currentPosition);
+            
+            int SpeedPercent = Propultion.SpeadScale[terrainUnderMech];
+            
+            float TarainMoveScaler = ((float)SpeedPercent)/100f;
+            
+            /* Uncomment for debug spam */
+            /*
+            Debug.Log(" Poss: " + currentPosition.ToString() + "  /n   terrain: " + terrainUnderMech.ToString() +
+                " /n   Speed percent: " + SpeedPercent.ToString() + "  -> float:" + TarainMoveScaler.ToString());
+            /**/
+
+            MoveDir *= TarainMoveScaler;
+        }
+        /* @Siv TUTAJ JUZ NIE */
+
+
         if (M_Start)
         {
             switch (MountedDrive)
@@ -94,7 +119,7 @@ public class PlayerInput_Ctrl : MonoBehaviour {
         {
             float TimeFromLast_speedUpdate = Time.time - moveUpdateTimer ;
             float TimeScaler = 1f / (30f * TimeFromLast_speedUpdate); /* 30 FPS expected*/ 
-
+            
             switch (MountedDrive)
             {
                 case DriveType.JetThrusters:

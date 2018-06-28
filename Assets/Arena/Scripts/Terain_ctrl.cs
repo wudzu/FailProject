@@ -91,7 +91,7 @@ public class Terain_ctrl : MonoBehaviour {
                 {
                     float angle = Mathf.Atan2((float)(Yidx - ArraySize_Y/2), (float)(Xidx - ArraySize_X/2));
 
-                    int terainIndex = Mathf.FloorToInt((Mathf.PI + angle) / angle_width);
+                    int terainIndex = Mathf.FloorToInt((Mathf.PI + angle-0.001f) / angle_width);
                     TerainArray_shadow[Xidx, Yidx] = (Terain_types)(terainIndex);
                 }
 
