@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Propultion_types { Immobile, Wills, Tanktreed, Hovering, Bipedal, Multileg, TestOnly}
+public enum Propultion_types { Immobile, Wills, Tanktreed, Hovering, Bipedal, Multileg, TestOnly, TestPathfinding}
 
 public class Propultion_System {
 
@@ -70,6 +70,13 @@ public class Propultion_System {
                 Result[Terain_types.Water] = 30;
                 Result[Terain_types.Acid] = 150;
                 break;
+			case Propultion_types.TestPathfinding:
+				Result[Terain_types.Ground] = 1;
+				Result[Terain_types.Road] = 0;
+				Result[Terain_types.Sand] = 2;
+				Result[Terain_types.Water] = 5;
+				Result[Terain_types.Acid] = 7;
+				break;
             default:
                 Result[Terain_types.Ground] = 1;
                 Result[Terain_types.Road] = 1;

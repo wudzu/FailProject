@@ -11,6 +11,9 @@ public class Grid : MonoBehaviour {
 	public float nodeRadius;
 	Node[,] grid;
 
+	Terain_ctrl Terain_Map_ref;
+	Propultion_System Propultion = new Propultion_System(Propultion_types.TestPathfinding);
+
 	int gridSizeX, gridSizeY;
 	float nodeWidth;
 
@@ -19,6 +22,8 @@ public class Grid : MonoBehaviour {
 		nodeWidth = 2 * nodeRadius;
 		gridSizeX = Mathf.RoundToInt (gridWorldSize.x/nodeWidth);
 		gridSizeY = Mathf.RoundToInt (gridWorldSize.y/nodeWidth);
+
+		Terain_Map_ref = FindObjectOfType<Terain_ctrl> ();
 
 		CreateGrid ();
 	}
@@ -38,7 +43,7 @@ public class Grid : MonoBehaviour {
 		for (int x = 0; x < gridSizeX; x++) {
 			for (int y = 0; y < gridSizeY; y++) {
 				worldPoint = worldBottomLeft + Vector3.right * (x * nodeWidth + nodeRadius) + Vector3.forward * (y * nodeWidth + nodeRadius);
-				grid[x,y] = new Node(!(Physics.CheckSphere(worldPoint, nodeRadius, unwalkableMask)), worldPoint, x, y);
+				grid[x,y] = new Node(!(Physics.CheckSphere(worldPoint, nodeRadius, unwalkableMask)), worldPoint, x, y, GetTerainCost(worldPoint));
 			}
 		}
 	}
@@ -73,7 +78,15 @@ public class Grid : MonoBehaviour {
 		return neighbour;
 	}
 
-	//public List<Node> path;
+	int GetTerainCost(Vector3 worldPoint) {
+		Vector2 point = new Vector2 (worldPoint.x, worldPoint.z);
+
+		Terain_types terrainUnderMech = Terain_Map_ref.GetTerainAt(point);
+
+		Debug.Log (Propultion.SpeadScale [terrainUnderMech]);
+
+		return Propultion.SpeadScale [terrainUnderMech];
+	}
 
 	void OnDrawGizmos(){
 		if (DisplayGrid) {

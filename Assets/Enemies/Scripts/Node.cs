@@ -13,6 +13,7 @@ public class Node : IHeapItem<Node> {
 
 	public int gCost;
 	public int hCost;
+	public int terainCost;
 
 	int heapIndex;
 
@@ -22,12 +23,13 @@ public class Node : IHeapItem<Node> {
 		}
 	}
 
-	public Node (bool _isEmpty, Vector3 _worldPos, int _gridX, int _gridY){
+	public Node (bool _isEmpty, Vector3 _worldPos, int _gridX, int _gridY, int _terainCost){
 		isEmptySpace = _isEmpty;
 		worldPosition = _worldPos;
 
 		gridX = _gridX;
 		gridY = _gridY;
+		terainCost = _terainCost;
 	}
 
 

@@ -133,7 +133,6 @@ public class Terain_ctrl : MonoBehaviour {
         return Terain_types.Ground;
     }
 
-
     public Terain_types[,] TerainArray
     {
         get
