@@ -22,7 +22,7 @@ public class InputTable_G  {
         public KeyCode Ultimate1;
         public KeyCode Interact;
 
-        public PlayerKeys(KeyCode [] KeyList)
+        /*public PlayerKeys(KeyCode [] KeyList)
         {
             Up          = KeyList[0];
             Down        = KeyList[1];
@@ -39,7 +39,31 @@ public class InputTable_G  {
             Defence     = KeyList[12];
             Ultimate1   = KeyList[13];
             Interact    = KeyList[14];
-        }
+        }*/
+
+		public PlayerKeys(int i)
+		{
+			
+			KeyCode [] KeyList = Default_0_List;
+			if (i == 1)
+				KeyList = Default_1_List;
+			
+			Up          = KeyList[0];
+			Down        = KeyList[1];
+			Left        = KeyList[2];
+			Right       = KeyList[3];
+			Jump        = KeyList[4];
+			EnginS_1    = KeyList[5];
+			EnginS_1    = KeyList[6];
+			EnginS_1    = KeyList[7];
+			EnginS_T    = KeyList[8];
+			FireLeft    = KeyList[9];
+			FireRight   = KeyList[10];
+			AltFire     = KeyList[11];
+			Defence     = KeyList[12];
+			Ultimate1   = KeyList[13];
+			Interact    = KeyList[14];
+		}
     }
 
     static KeyCode[] Default_0_List = new KeyCode[15] { KeyCode.W, KeyCode.S, KeyCode.A, KeyCode.D,
@@ -49,8 +73,21 @@ public class InputTable_G  {
                                                         KeyCode.LeftControl, KeyCode.LeftShift,
                                                         KeyCode.E, KeyCode.G};
 
-    public PlayerKeys Default_0 = new PlayerKeys(Default_0_List);
+	static KeyCode[] Default_1_List = new KeyCode[15] { KeyCode.I, KeyCode.K, KeyCode.J, KeyCode.L,
+														KeyCode.Space,
+														KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.F,
+														KeyCode.Mouse0, KeyCode.Mouse1,
+														KeyCode.LeftControl, KeyCode.LeftShift,
+														KeyCode.E, KeyCode.G};
+
+
+    //public PlayerKeys Default_0 = new PlayerKeys(Default_0_List);
+	public PlayerKeys Default_0 = new PlayerKeys(0);
 
     public PlayerKeys[] Player = new PlayerKeys[4];
 
+	public InputTable_G(int i)
+	{
+		Default_0 = new PlayerKeys (i);
+	}
 }

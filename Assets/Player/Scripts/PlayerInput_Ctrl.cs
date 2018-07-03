@@ -27,7 +27,7 @@ public class PlayerInput_Ctrl : MonoBehaviour {
     public Wepon_Ctrl Wepon_R = null;
     public Wepon_Ctrl Wepon_L = null;
 
-    InputTable_G MyInput = new InputTable_G();
+	InputTable_G MyInput = new InputTable_G(0);
     Rigidbody Body;
 
     float moveUpdateTimer = 0;
@@ -47,7 +47,7 @@ public class PlayerInput_Ctrl : MonoBehaviour {
             Debug.Log(" ERROR: right wepon not assigned ! ");
         if (Wepon_L == null)
             Debug.Log(" ERROR: left wepon not assigned ! ");
-
+		MyInput = new InputTable_G (PlayerNumber);
     }
 	
     float ToCursorRotation(GameObject Rot_obj) 

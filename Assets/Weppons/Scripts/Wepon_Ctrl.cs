@@ -22,7 +22,7 @@ public class Wepon_Ctrl : MonoBehaviour {
 
     public void Wepon_Colider_Hit(int Collider_Idx, Collision Col = null)
     {
-        if (Col.gameObject.CompareTag("Enemy"))
+		if (Col.gameObject.CompareTag("Enemy") || Col.gameObject.CompareTag("Player"))
         {
             if(AttacPhase == 3)
             {
@@ -157,7 +157,7 @@ public class Wepon_Ctrl : MonoBehaviour {
         StartingPosition = transform.localPosition;
         
         // [TO DO] might cause problems in PvP modes
-        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Players"), LayerMask.NameToLayer("PlayerWepon"));
+        //Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Players"), LayerMask.NameToLayer("PlayerWepon"));
 
     }
 	
