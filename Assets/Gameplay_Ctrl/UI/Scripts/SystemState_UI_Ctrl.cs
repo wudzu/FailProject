@@ -5,7 +5,8 @@ using UnityEngine;
 public class SystemState_UI_Ctrl : MonoBehaviour {
 
     public UnityEngine.UI.Text TempTextUI;
-    public Rigidbody PlayerBody;
+    public Rigidbody Player1Body;
+    public Rigidbody Player2Body;
 
     // Use this for initialization
     void Start () {
@@ -22,8 +23,11 @@ public class SystemState_UI_Ctrl : MonoBehaviour {
             TempTextUI.text = "FPS: ";
             TempTextUI.text += (1f / Time.deltaTime).ToString();
 
-            TempTextUI.text += "\n\nMechSpeed: ";
-            TempTextUI.text += PlayerBody.velocity.ToString();
+            TempTextUI.text += "\n\nMechSpeed (L): ";
+            TempTextUI.text += Player1Body.velocity.ToString();
+
+            TempTextUI.text += "\nMechSpeed (R): ";
+            TempTextUI.text += Player2Body.velocity.ToString();
         }
         else
         {

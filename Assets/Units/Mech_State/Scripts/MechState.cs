@@ -6,6 +6,7 @@ public class MechState : MonoBehaviour
 {
 
     public MechUnit_UI_Ctrl UI_interface;
+    public int UI_interface_Index =0;
 
     MechCore core = new MechCore();
 	List<MechArmor> armor = new List<MechArmor>();
@@ -60,7 +61,7 @@ public class MechState : MonoBehaviour
 		}*/
 
         /* Update displayed mech status */
-        UI_interface.Update_Mech_state_display(core.Get_HP_Level(), core.Get_Energy_Level(), armor);
+        UI_interface.Update_Mech_state_display(UI_interface_Index, core.Get_HP_Level(), core.Get_Energy_Level(), armor);
     }
 
 	// Use this for initialization
@@ -80,7 +81,7 @@ public class MechState : MonoBehaviour
 		core.start();
 
         /* initialize mech status displayed in UI */
-        UI_interface.Update_Mech_state_display(core.Get_HP_Level(), core.Get_Energy_Level(), armor);
+        UI_interface.Update_Mech_state_display(UI_interface_Index, core.Get_HP_Level(), core.Get_Energy_Level(), armor);
 
     }
 	
@@ -89,7 +90,7 @@ public class MechState : MonoBehaviour
 	{
         core.CoreUpdate(Time.deltaTime);
 
-        UI_interface.Update_Mech_state_display(core.Get_HP_Level(), core.Get_Energy_Level(), armor);
+        UI_interface.Update_Mech_state_display(UI_interface_Index, core.Get_HP_Level(), core.Get_Energy_Level(), armor);
     }
 }
 

@@ -4,26 +4,27 @@ using UnityEngine;
 
 public class MechUnit_UI_Ctrl : MonoBehaviour {
 
-    public UnityEngine.UI.Text TempTextUI;
+    public string DisplayName = "";
+    public UnityEngine.UI.Text[] TempTextUI;
     public bool DisplayHP_Bar = false;
     
     public GameObject HP_Bar_prefab;
     HP_bar_Ctrl HP_Bar = null;
 
-    void SetStatusText( float HP, float Energy, List<MechArmor> Armors )
+    void SetStatusText( int DisplayID, float HP, float Energy, List<MechArmor> Armors )
     {
 
-        if (TempTextUI)
+        if ((DisplayID < TempTextUI.Length) && TempTextUI[DisplayID])
         {
-            TempTextUI.text = "Player 1\n\n  Core: ";
-            TempTextUI.text += HP.ToString();
+            TempTextUI[DisplayID].text = DisplayName + "\n\n  Core: ";
+            TempTextUI[DisplayID].text += HP.ToString();
             foreach(MechArmor Armor_layer in Armors)
             {
-                TempTextUI.text += "\n  Armor (" + Armor_layer.getName() + ") : " + Armor_layer.getStructure().ToString();
+                TempTextUI[DisplayID].text += "\n  Armor (" + Armor_layer.getName() + ") : " + Armor_layer.getStructure().ToString();
             }
 
-            TempTextUI.text += "\n\n  Energy: ";
-            TempTextUI.text += Energy.ToString();
+            TempTextUI[DisplayID].text += "\n\n  Energy: ";
+            TempTextUI[DisplayID].text += Energy.ToString();
         }
         else if(HP_Bar)
         {
@@ -44,9 +45,9 @@ public class MechUnit_UI_Ctrl : MonoBehaviour {
 
     }
 
-    public void Update_Mech_state_display( float HP, float Energy, List<MechArmor> Armors)
+    public void Update_Mech_state_display( int DisplayID, float HP, float Energy, List<MechArmor> Armors)
     {
-        SetStatusText(HP, Energy, Armors);
+        SetStatusText(DisplayID, HP, Energy, Armors);
     }
 
 	// Use this for initialization
