@@ -15,12 +15,18 @@ public class PlayerInput_Ctrl : MonoBehaviour {
     public float Rotate_V_Break = 50f;
     public float WheelFriction = 0.3f;
 
+	public enum ControlType { KeyboardMouse, Pad };
+
+	public ControlType Controller = ControlType.KeyboardMouse;
+
 
     public DriveType MountedDrive = DriveType.JetThrusters;
     public Propultion_System Propultion = new Propultion_System(Propultion_types.TestOnly); // for testing different movement modification
 
     public Terain_ctrl Terain_Map_ref;
 
+	float last_x = 0f;
+	float last_y = 0f;
 
     public Camera PlayerView = null;
     public GameObject GunTower = null;
@@ -69,18 +75,69 @@ public class PlayerInput_Ctrl : MonoBehaviour {
             result -= 360f;
         if (result < -180f)
             result += 360f;
-        
+
+		print (result);
         return result;
     }
 
-    void KB_Apply_movement(bool up, bool down, bool left, bool right, bool M_Start=false)
+	float PadRotation(GameObject Rot_obj)
+	{
+		float result = 0f;
+
+		float x = Input.GetAxis(MyInput.Default_0.look_horizontal);
+		float y = -Input.GetAxis(MyInput.Default_0.look_vertical);
+
+
+		if (x == 0f && y == 0f) {
+			x = last_x;
+			y = last_y;
+		} else {
+			last_x = x;
+			last_y = y;
+		}
+			
+
+		float Rt_Target = Mathf.Atan2 (x, y);
+		Rt_Target *= 180f / Mathf.PI;
+		Rt_Target += (Rt_Target < 0f) ? (360f) : (0f);
+
+
+		float Rt_Current = Rot_obj.transform.localRotation.eulerAngles.y;
+
+		result = Rt_Target - Rt_Current;
+		if(result > 180f)
+			result -= 360f;
+		if (result < -180f)
+			result += 360f;
+
+		print (result);
+		return result;
+	}
+
+	void KB_Apply_movement(float x, float y, bool M_Start=false)
+	{
+		Vector3 MoveDir = new Vector3 (x, 0, -y);
+		MoveDir.Normalize();
+
+		KB_Apply_movement (MoveDir, M_Start);
+	}
+
+	void KB_Apply_movement(bool up, bool down, bool left, bool right, bool M_Start=false)
+	{
+		Vector3 MoveDir = Vector3.zero;
+		if (up) MoveDir += Vector3.forward;
+		if (down) MoveDir += Vector3.back;
+		if (left) MoveDir += Vector3.left;
+		if (right) MoveDir += Vector3.right;
+		MoveDir.Normalize();
+
+		KB_Apply_movement (MoveDir, M_Start);
+	}
+
+
+
+	void KB_Apply_movement(Vector3 MoveDir, bool M_Start=false)
     {
-        Vector3 MoveDir = Vector3.zero;
-        if (up) MoveDir += Vector3.forward;
-        if (down) MoveDir += Vector3.back;
-        if (left) MoveDir += Vector3.left;
-        if (right) MoveDir += Vector3.right;
-        MoveDir.Normalize();
 
         /* @Siv TUTAJ CZYTAJ */
         if (Terain_Map_ref)
@@ -196,9 +253,10 @@ public class PlayerInput_Ctrl : MonoBehaviour {
 
         //result = Body.inertiaTensor.y * ( (ToCursorRotation(gameObject) - Body.angularVelocity.y* Time.deltaTime)/(Time.deltaTime* Time.deltaTime) );
 
-        float dist = ToCursorRotation(gameObject);
+		float dist = (Controller == ControlType.KeyboardMouse) ? ToCursorRotation(gameObject) : PadRotation(gameObject);
 
-        result = dist - Body.angularVelocity.y* Mathf.Abs( Rotate_V_Break/ dist);
+
+		result = dist - Body.angularVelocity.y* Mathf.Abs( Rotate_V_Break/ dist );
 
 
         if (result > Rotate_F_Max)
@@ -210,6 +268,7 @@ public class PlayerInput_Ctrl : MonoBehaviour {
 
         return result;
     }
+		
 
     bool IsGrounded()
     {
@@ -218,16 +277,22 @@ public class PlayerInput_Ctrl : MonoBehaviour {
 
 // Update is called once per frame
 void Update () {
-
-
+		if (Controller == ControlType.Pad)
+			KB_Apply_movement(
+				Input.GetAxis(MyInput.Default_0.move_horizontal),
+				Input.GetAxis(MyInput.Default_0.move_vertical),
+				false);
+		
         if (Input.anyKey)
         {
-            KB_Apply_movement(
-                Input.GetKey(MyInput.Default_0.Up),
-                Input.GetKey(MyInput.Default_0.Down),
-                Input.GetKey(MyInput.Default_0.Left),
-                Input.GetKey(MyInput.Default_0.Right),
-                false);
+			if (Controller == ControlType.KeyboardMouse)
+	            KB_Apply_movement(
+	                Input.GetKey(MyInput.Default_0.Up),
+	                Input.GetKey(MyInput.Default_0.Down),
+	                Input.GetKey(MyInput.Default_0.Left),
+	                Input.GetKey(MyInput.Default_0.Right),
+	                false);
+				
 
             KB_Jump(
                 Input.GetKeyDown(MyInput.Default_0.Jump),
@@ -242,12 +307,13 @@ void Update () {
         }
         if (Input.anyKeyDown)
         {
-            KB_Apply_movement(
-                Input.GetKey(MyInput.Default_0.Up),
-                Input.GetKey(MyInput.Default_0.Down),
-                Input.GetKey(MyInput.Default_0.Left),
-                Input.GetKey(MyInput.Default_0.Right),
-                true);
+			if (Controller == ControlType.KeyboardMouse)
+	            KB_Apply_movement(
+	                Input.GetKey(MyInput.Default_0.Up),
+	                Input.GetKey(MyInput.Default_0.Down),
+	                Input.GetKey(MyInput.Default_0.Left),
+	                Input.GetKey(MyInput.Default_0.Right),
+	                true);
 
             KB_Jump(
                 Input.GetKeyDown(MyInput.Default_0.Jump),
