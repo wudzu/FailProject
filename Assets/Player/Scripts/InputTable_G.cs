@@ -22,10 +22,15 @@ public class InputTable_G  {
         public KeyCode Ultimate1;
         public KeyCode Interact;
 
+		public bool attack_axis = true;
+
 		public string move_horizontal;
 		public string move_vertical;
 		public string look_horizontal;
 		public string look_vertical;
+
+		public string attack_left;
+		public string attack_right;
 
 
         /*public PlayerKeys(KeyCode [] KeyList)
@@ -74,10 +79,12 @@ public class InputTable_G  {
 			move_vertical = Default_Axes[1];
 			look_horizontal = Default_Axes[2];
 			look_vertical = Default_Axes[3];
+			attack_left = Default_Axes[4];
+			attack_right = Default_Axes[5];
 		}
     }
 
-	static string[] Default_Axes = new string[4] { "Horizontal", "Vertical", "Horizontal2", "Vertical2" };
+	static string[] Default_Axes = new string[6] { "Horizontal", "Vertical", "Horizontal2", "Vertical2", "LeftTrigger", "RightTrigger" };
 
     static KeyCode[] Default_0_List = new KeyCode[15] { KeyCode.W, KeyCode.S, KeyCode.A, KeyCode.D,
                                                         KeyCode.Space,

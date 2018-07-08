@@ -3,6 +3,7 @@
 	<Constants>
 		<CoreStructure>100.0</CoreStructure>
 		<CoreEnergy>100.0</CoreEnergy>
+		<energyMove>0.6</energyMove>
 		<CoreRegeneration>5.0</CoreRegeneration>
 		<BluntEnergyDamage>0.25</BluntEnergyDamage>
 		<CutEnergyDamage>0.5</CutEnergyDamage>

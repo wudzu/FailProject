@@ -31,6 +31,21 @@ public class MechState : MonoBehaviour
 		return result;
 	}
 
+	public float getEnergy()
+	{
+		return core.Get_Energy_Level ();
+	}
+
+	public float movementEnergyDrain(float force)
+	{
+		return core.EnergyDrainMovement (force);
+	}
+
+	public bool EnergyDrainWeapon (float force)
+	{
+		return core.EnergyDrainWeapon(force);
+	}
+
 	public void damage (MechDamage dmg)
 	{
 

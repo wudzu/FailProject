@@ -15,6 +15,8 @@ public class PlayerInput_Ctrl : MonoBehaviour {
     public float Rotate_V_Break = 50f;
     public float WheelFriction = 0.3f;
 
+	public MechState mechState;
+
 	public enum ControlType { KeyboardMouse, Pad };
 
 	public ControlType Controller = ControlType.KeyboardMouse;
@@ -76,7 +78,7 @@ public class PlayerInput_Ctrl : MonoBehaviour {
         if (result < -180f)
             result += 360f;
 
-		print (result);
+
         return result;
     }
 
@@ -109,8 +111,7 @@ public class PlayerInput_Ctrl : MonoBehaviour {
 			result -= 360f;
 		if (result < -180f)
 			result += 360f;
-
-		print (result);
+		
 		return result;
 	}
 
@@ -134,11 +135,20 @@ public class PlayerInput_Ctrl : MonoBehaviour {
 		KB_Apply_movement (MoveDir, M_Start);
 	}
 
-
+	float MovementEnergyConsideration(Vector3 MoveDir)
+	{
+		float force = MoveDir.magnitude ;
+		print (force);
+		float PossibleToMove = mechState.movementEnergyDrain (force);
+		print (PossibleToMove);
+		print ("Tutaj");
+		return PossibleToMove;
+	}
 
 	void KB_Apply_movement(Vector3 MoveDir, bool M_Start=false)
     {
 
+		MoveDir = MovementEnergyConsideration (MoveDir) * MoveDir;
         /* @Siv TUTAJ CZYTAJ */
         if (Terain_Map_ref)
         {
@@ -207,27 +217,35 @@ public class PlayerInput_Ctrl : MonoBehaviour {
     }
 
     // interface with Wepon_Ctrl class
-    void KB_Attak(bool left,  bool right, bool alt_active, bool Attac_Start = false)
+    void KB_Attak(bool left,  bool right, bool alt_active, bool Attack_Start = false)
     {
-        if (Attac_Start)
+        if (Attack_Start)
         {
             if (left)
             {
+				bool enoughEnergy = mechState.EnergyDrainWeapon (10);
+				if (enoughEnergy)
                 Wepon_L.Attak(alt_active);
             }
             if (right)
             {
-                Wepon_R.Attak(alt_active);
+				bool enoughEnergy = mechState.EnergyDrainWeapon (10);
+				if (enoughEnergy)
+				Wepon_R.Attak(alt_active);
             }
         }
         else
         {
             if (left)
             {
+				bool enoughEnergy = mechState.EnergyDrainWeapon (1);
+				if (enoughEnergy)
                 Wepon_L.RefreshAttak(alt_active);
             }
             if (right)
-            {
+			{
+				bool enoughEnergy = mechState.EnergyDrainWeapon (1);
+				if (enoughEnergy)
                 Wepon_R.RefreshAttak(alt_active);
             }
         }
@@ -298,14 +316,16 @@ void Update () {
                 Input.GetKeyDown(MyInput.Default_0.Jump),
                 false);
 
-            KB_Attak(
-                Input.GetKeyDown(MyInput.Default_0.FireLeft),
-                Input.GetKeyDown(MyInput.Default_0.FireRight),
-                Input.GetKey(MyInput.Default_0.AltFire),
-                false);
+			if (!((Controller == ControlType.Pad) && MyInput.Default_0.attack_axis)) {
+				KB_Attak (
+					Input.GetKeyDown (MyInput.Default_0.FireLeft),
+					Input.GetKeyDown (MyInput.Default_0.FireRight),
+					Input.GetKey (MyInput.Default_0.AltFire),
+					true);
+			}
 
         }
-        if (Input.anyKeyDown)
+		if (Input.anyKeyDown || (Input.GetAxis(MyInput.Default_0.attack_left) != 0) || (Input.GetAxis(MyInput.Default_0.attack_right) != 0) )
         {
 			if (Controller == ControlType.KeyboardMouse)
 	            KB_Apply_movement(
@@ -319,11 +339,13 @@ void Update () {
                 Input.GetKeyDown(MyInput.Default_0.Jump),
                 true);
 
-            KB_Attak(
-                Input.GetKeyDown(MyInput.Default_0.FireLeft),
-                Input.GetKeyDown(MyInput.Default_0.FireRight),
-                Input.GetKey(MyInput.Default_0.AltFire),
-                true);
+			if (!((Controller == ControlType.Pad) && MyInput.Default_0.attack_axis)) {
+				KB_Attak (
+					Input.GetKeyDown (MyInput.Default_0.FireLeft),
+					Input.GetKeyDown (MyInput.Default_0.FireRight),
+					Input.GetKey (MyInput.Default_0.AltFire),
+					false);
+			}
             
 
 
@@ -333,6 +355,13 @@ void Update () {
             }
         }
 
+		if ((Controller == ControlType.Pad) && MyInput.Default_0.attack_axis) {
+			KB_Attak (
+				(Input.GetAxis (MyInput.Default_0.attack_left) != 0),
+				(Input.GetAxis (MyInput.Default_0.attack_right) != 0),
+				Input.GetKey (MyInput.Default_0.AltFire),
+				true);
+		}
         CameraFollow();
 
         //Body.AddTorque(0f, ToCursorRotation(gameObject), 0f, ForceMode.Force);

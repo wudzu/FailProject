@@ -12,6 +12,10 @@ public class MechArmorConstantsItem
 	[XmlElement("CoreEnergy")]
 	public float CoreEnergy;
 
+
+	[XmlElement("energyMove")]
+	public float energyMove;
+
 	[XmlElement("CoreRegeneration")]
 	public float CoreRegeneration;
 

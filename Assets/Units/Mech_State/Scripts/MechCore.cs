@@ -60,6 +60,27 @@ public class MechCore
         return energy;
     }
 
+	public float EnergyDrainMovement(float force)
+	{
+		float energy_used = force * MechArmorLoader.getConstants ().energyMove;
+		if (energy > energy_used) {
+			energy -= energy_used;
+			return 1.0f;
+		} else {
+			energy_used = energy / energy_used;
+			energy = 0;
+			return energy_used;
+		}
+	}
+
+	public bool EnergyDrainWeapon(float force)
+	{
+		if (force > energy)
+			return false;
+		energy -= force;
+		return true;
+	}
+
 
     // Update is called once per frame
     public void CoreUpdate (float TimeDif)
